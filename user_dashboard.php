@@ -15,6 +15,58 @@
 </head>
 <body class="bg-gray-50">
 
+    <?php
+    session_start();
+    require 'db_connect.php';
+
+    // Make sure user is logged in
+    if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+    }
+
+    $user_id = $_SESSION['user_id'];
+
+    // Fetch user details
+    $user_sql = "SELECT full_name FROM users WHERE id = ?";
+    $stmt = $conn->prepare($user_sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $user_result = $stmt->get_result()->fetch_assoc();
+    $user_name = $user_result['full_name'] ?? 'User';
+
+    // Total spent this month
+    $spent_sql = "SELECT SUM(amount) as total_spent 
+                FROM transactions 
+                WHERE user_id = ? AND status='success' 
+                AND MONTH(transaction_date)=MONTH(CURRENT_DATE())";
+    $stmt = $conn->prepare($spent_sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $spent_result = $stmt->get_result()->fetch_assoc();
+    $total_spent = $spent_result['total_spent'] ?? 0;
+
+    // Last transaction
+    $last_sql = "SELECT amount, transaction_date 
+                FROM transactions 
+                WHERE user_id = ? AND status='success' 
+                ORDER BY transaction_date DESC LIMIT 1";
+    $stmt = $conn->prepare($last_sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $last_transaction = $stmt->get_result()->fetch_assoc();
+
+    // Total receipts
+    $receipt_sql = "SELECT COUNT(*) as total_receipts 
+                    FROM receipts WHERE user_id = ?";
+    $stmt = $conn->prepare($receipt_sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $receipt_result = $stmt->get_result()->fetch_assoc();
+    $total_receipts = $receipt_result['total_receipts'] ?? 0;
+    ?>
+
+
     <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-10">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -38,21 +90,22 @@
     <!-- Dashboard Section -->
     <main id="dashboard" class="page-content container mx-auto px-4 py-8 md:py-12">
         <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">Welcome Back, Rose!</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Welcome Back, <?php echo htmlspecialchars($user_name); ?>!</h1>
             <p class="text-gray-600 mb-8">Here's a summary of your activity.</p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                 <div class="bg-green-100 p-6 rounded-lg">
                     <h3 class="text-lg font-semibold text-green-800">Total Spent (This Month)</h3>
-                    <p class="text-3xl font-bold text-green-900">₹2,950.00</p>
+                    <p class="text-3xl font-bold text-green-900">₹<?php echo number_format($total_spent, 2); ?></p>
                 </div>
                  <div class="bg-blue-100 p-6 rounded-lg">
                     <h3 class="text-lg font-semibold text-blue-800">Last Transaction</h3>
-                    <p class="text-3xl font-bold text-blue-900">₹800.00</p>
-                    <p class="text-sm text-blue-700">on 09-09-2025</p>
+                    <p class="text-3xl font-bold text-blue-900">₹<?php echo $last_transaction['amount'] ?? 0; ?></p>
+                    <p class="text-sm text-blue-700">on <?php echo isset($last_transaction['transaction_date']) ? date("d-m-Y", strtotime($last_transaction['transaction_date'])) : "-"; ?>
+        </p></p>
                 </div>
                  <div class="bg-yellow-100 p-6 rounded-lg">
                     <h3 class="text-lg font-semibold text-yellow-800">Total Receipts</h3>
-                    <p class="text-3xl font-bold text-yellow-900">4</p>
+                    <p class="text-3xl font-bold text-yellow-900"><?php echo $total_receipts; ?></p>
                 </div>
             </div>
         </div>
@@ -124,27 +177,42 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
-                        <tr>
-                            <td class="text-left py-4 px-4 border-b">RCPT1001</td>
-                            <td class="text-left py-4 px-4 border-b">08-09-2025</td>
-                            <td class="text-left py-4 px-4 border-b">₹500.00</td>
-                            <td class="text-left py-4 px-4 border-b">UPI</td>
-                            <td class="text-left py-4 px-4 border-b"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs font-medium">Success</span></td>
-                            <td class="text-center py-4 px-4 border-b">
-                                <button class="text-indigo-600 hover:text-indigo-800 text-xl"><i class="fas fa-download"></i></button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="text-left py-4 px-4 border-b">RCPT1002</td>
-                            <td class="text-left py-4 px-4 border-b">09-09-2025</td>
-                            <td class="text-left py-4 px-4 border-b">₹800.00</td>
-                            <td class="text-left py-4 px-4 border-b">Card</td>
-                             <td class="text-left py-4 px-4 border-b"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs font-medium">Success</span></td>
-                            <td class="text-center py-4 px-4 border-b">
-                                <button class="text-indigo-600 hover:text-indigo-800 text-xl"><i class="fas fa-download"></i></button>
-                            </td>
-                        </tr>
+                            <?php
+                            $receipt_sql = "
+                                SELECT r.receipt_no, r.receipt_date, t.amount, t.payment_mode, t.status
+                                FROM receipts r
+                                JOIN transactions t ON r.transaction_id = t.id
+                                WHERE r.user_id = ?
+                                ORDER BY r.receipt_date DESC
+                            ";
+                            $stmt = $conn->prepare($receipt_sql);
+                            $stmt->bind_param("i", $user_id);
+                            $stmt->execute();
+                            $receipts = $stmt->get_result();
+
+                            if ($receipts->num_rows > 0) {
+                                while ($row = $receipts->fetch_assoc()) {
+                                    echo "<tr class='hover:bg-gray-50'>
+                                        <td class='text-left py-4 px-4 border-b'>{$row['receipt_no']}</td>
+                                        <td class='text-left py-4 px-4 border-b'>" . date("d-m-Y", strtotime($row['receipt_date'])) . "</td>
+                                        <td class='text-left py-4 px-4 border-b'>₹{$row['amount']}</td>
+                                        <td class='text-left py-4 px-4 border-b'>{$row['payment_mode']}</td>
+                                        <td class='text-left py-4 px-4 border-b'>
+                                            <span class='bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs font-medium'>{$row['status']}</span>
+                                        </td>
+                                        <td class='text-center py-4 px-4 border-b'>
+                                            <button class='text-indigo-600 hover:text-indigo-800 text-xl'>
+                                                <i class='fas fa-download'></i>
+                                            </button>
+                                        </td>
+                                        </tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='6' class='text-center py-4'>No receipts found.</td></tr>";
+                            }
+                            ?>
                     </tbody>
+
                 </table>
             </div>
         </div>
@@ -204,4 +272,3 @@
     </script>
 </body>
 </html>
-
