@@ -2,7 +2,7 @@
 $host = "localhost"; 
 $db_user = "root";   // change if needed
 $db_pass = "";       // your DB password
-$db_name = "fuel_reciept_db";
+$db_name = "fuel_receipt_db";
 
 $conn = new mysqli($host, $db_user, $db_pass, $db_name);
 
