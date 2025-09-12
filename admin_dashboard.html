@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Digital Fuel Receipt Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-800 text-white flex flex-col">
+            <div class="p-6 text-2xl font-bold border-b border-gray-700">
+                <i class="fas fa-gas-pump mr-2"></i>DFRH Admin
+            </div>
+            <nav class="flex-1 mt-6">
+                <a href="#dashboard" class="nav-link flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200">
+                    <i class="fas fa-tachometer-alt w-6"></i>
+                    <span class="mx-4">Dashboard</span>
+                </a>
+                <a href="#user-directory" class="nav-link flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200">
+                    <i class="fas fa-users w-6"></i>
+                    <span class="mx-4">User Directory</span>
+                </a>
+                <a href="#view-receipts" class="nav-link flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200">
+                    <i class="fas fa-receipt w-6"></i>
+                    <span class="mx-4">View All Receipts</span>
+                </a>
+                 <a href="#transaction-log" class="nav-link flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200">
+                    <i class="fas fa-clipboard-list w-6"></i>
+                    <span class="mx-4">Transaction Log</span>
+                </a>
+                <a href="#reports" class="nav-link flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200">
+                    <i class="fas fa-chart-bar w-6"></i>
+                    <span class="mx-4">Generate Reports</span>
+                </a>
+            </nav>
+            <div class="p-6 border-t border-gray-700">
+                 <a href="login.html" class="flex items-center px-6 py-3 text-gray-300 hover:bg-red-700 hover:text-white transition-colors duration-200">
+                    <i class="fas fa-sign-out-alt w-6"></i>
+                    <span class="mx-4">Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-md p-4 flex justify-between items-center">
+                <h1 class="text-2xl font-semibold">Admin Panel – Digital Fuel Receipt Hub</h1>
+                <div class="flex items-center space-x-4">
+                    <span>Welcome, Admin!</span>
+                    <img src="https://placehold.co/40x40/E2E8F0/4A5568?text=A" class="rounded-full" alt="Admin Avatar">
+                </div>
+            </header>
+
+            <div class="flex-1 p-6 md:p-8 overflow-y-auto">
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="page-content bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                    <h2 class="text-3xl font-bold mb-6">Dashboard</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-blue-100 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-blue-800">Total Users</h3>
+                            <p class="text-3xl font-bold text-blue-900">1,250</p>
+                        </div>
+                        <div class="bg-green-100 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-green-800">Total Transactions</h3>
+                            <p class="text-3xl font-bold text-green-900">5,430</p>
+                        </div>
+                        <div class="bg-yellow-100 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-yellow-800">Revenue Today</h3>
+                            <p class="text-3xl font-bold text-yellow-900">₹45,200</p>
+                        </div>
+                        <div class="bg-indigo-100 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-indigo-800">Pending Issues</h3>
+                            <p class="text-3xl font-bold text-indigo-900">3</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Directory Section -->
+                <div id="user-directory" class="page-content hidden bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                    <h2 class="text-3xl font-bold mb-6">User Directory</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-200">
+                            <thead class="bg-gray-200">
+                                <tr>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Email</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Vehicle No</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                                    <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Sample User Row -->
+                                <tr>
+                                    <td class="text-left py-3 px-4">Rose</td>
+                                    <td class="text-left py-3 px-4">user@example.com</td>
+                                    <td class="text-left py-3 px-4">TN-07-AB-1234</td>
+                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Active</span></td>
+                                    <td class="text-center py-3 px-4">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2"><i class="fas fa-edit"></i></button>
+                                        <button class="text-red-500 hover:text-red-700"><i class="fas fa-power-off"></i></button>
+                                    </td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="text-left py-3 px-4">Ravi</td>
+                                    <td class="text-left py-3 px-4">ravi@example.com</td>
+                                    <td class="text-left py-3 px-4">TN-09-XY-5678</td>
+                                    <td class="text-left py-3 px-4"><span class="bg-gray-200 text-gray-800 py-1 px-3 rounded-full text-xs">Inactive</span></td>
+                                    <td class="text-center py-3 px-4">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2"><i class="fas fa-edit"></i></button>
+                                        <button class="text-green-500 hover:text-green-700"><i class="fas fa-power-off"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- View Receipts Section -->
+                <div id="view-receipts" class="page-content hidden bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                    <h2 class="text-3xl font-bold mb-6">All Receipts</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 p-4 bg-gray-50 rounded-lg border">
+                        <div>
+                            <label for="date-range" class="block text-sm font-medium text-gray-700 mb-1">Date Range</label>
+                            <input type="date" id="date-range" class="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label for="user-search" class="block text-sm font-medium text-gray-700 mb-1">User / Vehicle No.</label>
+                            <input type="text" id="user-search" placeholder="Search..." class="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label for="payment-mode" class="block text-sm font-medium text-gray-700 mb-1">Payment Mode</label>
+                            <select id="payment-mode" class="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                                <option>All</option><option>UPI</option><option>Card</option><option>Cash</option>
+                            </select>
+                        </div>
+                        <div class="flex items-end space-x-2">
+                             <button class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-200 flex items-center justify-center">
+                                <i class="fas fa-filter mr-2"></i> Apply
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-3 mb-6">
+                        <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-file-excel mr-2"></i> Export to Excel
+                        </button>
+                        <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-file-pdf mr-2"></i> Export to PDF
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-200">
+                            <thead class="bg-gray-200">
+                                <tr>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Receipt No</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">User Name</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Vehicle No</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Date</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Amount</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Payment Mode</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                                <tr>
+                                    <td class="text-left py-3 px-4">RCPT1001</td>
+                                    <td class="text-left py-3 px-4">Rose</td>
+                                    <td class="text-left py-3 px-4">TN-07-AB-1234</td>
+                                    <td class="text-left py-3 px-4">08-09-2025</td>
+                                    <td class="text-left py-3 px-4">₹500.00</td>
+                                    <td class="text-left py-3 px-4">UPI</td>
+                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Success</span></td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="text-left py-3 px-4">RCPT1002</td>
+                                    <td class="text-left py-3 px-4">Ravi</td>
+                                    <td class="text-left py-3 px-4">TN-09-XY-5678</td>
+                                    <td class="text-left py-3 px-4">09-09-2025</td>
+                                    <td class="text-left py-3 px-4">₹800.00</td>
+                                    <td class="text-left py-3 px-4">Card</td>
+                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Success</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Transaction Log Section -->
+                <div id="transaction-log" class="page-content hidden bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                    <h2 class="text-3xl font-bold mb-6">Transaction Log</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-200">
+                            <thead class="bg-gray-200">
+                                <tr>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Transaction ID</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Date & Time</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">User</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Amount</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-left py-3 px-4">TXN123456789</td>
+                                    <td class="text-left py-3 px-4">2025-09-08 10:30 AM</td>
+                                    <td class="text-left py-3 px-4">Rose</td>
+                                    <td class="text-left py-3 px-4">₹500.00</td>
+                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Success</span></td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="text-left py-3 px-4">TXN987654321</td>
+                                    <td class="text-left py-3 px-4">2025-09-09 02:15 PM</td>
+                                    <td class="text-left py-3 px-4">Ravi</td>
+                                    <td class="text-left py-3 px-4">₹800.00</td>
+                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Success</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Generate Reports Section -->
+                <div id="reports" class="page-content hidden bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                    <h2 class="text-3xl font-bold mb-6">Generate Reports</h2>
+                    <div class="space-y-6 max-w-lg">
+                        <div>
+                            <label for="report-type" class="block text-sm font-medium text-gray-700 mb-1">Report Type</label>
+                            <select id="report-type" class="w-full p-2 border border-gray-300 rounded-md">
+                                <option>Daily Sales Report</option>
+                                <option>Monthly Sales Report</option>
+                                <option>User Activity Report</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="report-date" class="block text-sm font-medium text-gray-700 mb-1">Select Date / Month</label>
+                            <input type="date" id="report-date" class="w-full p-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex items-center justify-center">
+                                <i class="fas fa-file-excel mr-2"></i> Export to Excel
+                            </button>
+                            <button class="w-full bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 flex items-center justify-center">
+                                <i class="fas fa-file-pdf mr-2"></i> Export to PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.page-content');
+
+            const showSection = (hash) => {
+                const targetHash = hash || '#dashboard';
+                let sectionFound = false;
+
+                sections.forEach(section => {
+                    if ('#' + section.id === targetHash) {
+                        section.classList.remove('hidden');
+                        sectionFound = true;
+                    } else {
+                        section.classList.add('hidden');
+                    }
+                });
+
+                if (!sectionFound) {
+                    document.getElementById('dashboard').classList.remove('hidden');
+                }
+
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === targetHash) {
+                        link.classList.add('bg-gray-900', 'text-white', 'font-semibold');
+                        link.classList.remove('text-gray-300');
+                    } else {
+                        link.classList.remove('bg-gray-900', 'text-white', 'font-semibold');
+                        link.classList.add('text-gray-300');
+                    }
+                });
+            };
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const hash = link.getAttribute('href');
+                    window.location.hash = hash;
+                });
+            });
+
+            window.addEventListener('hashchange', () => {
+                showSection(window.location.hash);
+            });
+
+            showSection(window.location.hash);
+        });
+    </script>
+</body>
+</html>
+

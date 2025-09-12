@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login / Register</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <!-- Login Form -->
+    <form id="loginForm" class="space-y-6">
+      <h2 class="text-2xl font-bold text-center">Login</h2>
+
+      <div>
+        <label for="login-email" class="text-sm font-medium text-gray-700">Email</label>
+        <input id="login-email" name="email" type="email" required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <div>
+        <label for="login-password" class="text-sm font-medium text-gray-700">Password</label>
+        <input id="login-password" name="password" type="password" required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <button type="submit"
+        class="w-full flex justify-center py-3 px-4 rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+        Login
+      </button>
+
+      <p class="text-sm text-center text-gray-600">
+        <a href="#" id="toggle-form" class="font-medium text-indigo-600 hover:text-indigo-500">
+          Don’t have an account? Sign up
+        </a>
+      </p>
+    </form>
+
+    <!-- Register Form (hidden initially) -->
+    <form id="registerForm" class="hidden space-y-6" novalidate>
+      <h2 class="text-2xl font-bold text-center">Register</h2>
+
+      <div>
+        <label for="register-name" class="text-sm font-medium text-gray-700">Full Name</label>
+        <input id="register-name" name="name" type="text" required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <div>
+        <label for="register-email" class="text-sm font-medium text-gray-700">Email</label>
+        <input id="register-email" name="email" type="email" required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <div>
+        <label for="register-vehicle" class="text-sm font-medium text-gray-700">Vehicle No.</label>
+        <input id="register-vehicle" name="vehicle_no" type="text" required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <div>
+        <label for="register-password" class="text-sm font-medium text-gray-700">Password</label>
+        <input id="register-password" name="password" type="password" required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <div>
+        <label for="register-confirm-password" class="text-sm font-medium text-gray-700">Confirm Password</label>
+        <input id="register-confirm-password" type="password" required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <button type="submit"
+        class="w-full flex justify-center py-3 px-4 rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+        Create Account
+      </button>
+
+      <p class="text-sm text-center text-gray-600">
+        <a href="#" id="toggle-back" class="font-medium text-indigo-600 hover:text-indigo-500">
+          Already have an account? Login
+        </a>
+      </p>
+    </form>
+  </div>
+
+  <script>
+    // Toggle between login and register
+    document.getElementById("toggle-form").addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("loginForm").classList.add("hidden");
+      document.getElementById("registerForm").classList.remove("hidden");
+    });
+
+    document.getElementById("toggle-back").addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("registerForm").classList.add("hidden");
+      document.getElementById("loginForm").classList.remove("hidden");
+    });
+
+    // Register form submit
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let pass = document.getElementById("register-password").value;
+      let confirm = document.getElementById("register-confirm-password").value;
+
+      if (pass !== confirm) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      let formData = new FormData(this);
+
+      fetch("register.php", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.text())
+      .then(data => {
+        if (data === "success") {
+          alert("Registration successful! Please login.");
+          document.getElementById("registerForm").reset();
+          document.getElementById("registerForm").classList.add("hidden");
+          document.getElementById("loginForm").classList.remove("hidden");
+        } else {
+          alert("Registration failed: " + data);
+        }
+      });
+    });
+
+    // Login form submit
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let formData = new FormData(this);
+
+      fetch("login.php", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.text())
+      .then(data => {
+        if (data === "admin") {
+          window.location.href = "admin_dashboard.html";
+        } else if (data === "user") {
+          window.location.href = "user_dashboard.html";
+        } else if (data === "inactive") {
+          alert("⚠️ Your account is inactive. Please contact admin.");
+        } else {
+          alert("Login failed: " + data);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
