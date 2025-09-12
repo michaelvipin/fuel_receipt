@@ -28,12 +28,12 @@
     $user_id = $_SESSION['user_id'];
 
     // Fetch user details
-    $user_sql = "SELECT full_name FROM users WHERE id = ?";
+    $user_sql = "SELECT name FROM users WHERE id = ?";
     $stmt = $conn->prepare($user_sql);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $user_result = $stmt->get_result()->fetch_assoc();
-    $user_name = $user_result['full_name'] ?? 'User';
+    $user_name = $user_result['name'] ?? 'User';
 
     // Total spent this month
     $spent_sql = "SELECT SUM(amount) as total_spent 
