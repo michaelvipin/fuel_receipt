@@ -115,14 +115,15 @@
     <main id="payment" class="page-content hidden container mx-auto px-4 py-8 md:py-12">
         <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg max-w-2xl mx-auto">
              <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Make a Payment</h1>
-             <form class="space-y-6">
+             <form action="transaction.php" method="POST" class="space-y-6">
+                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                 <div>
                     <label for="amount" class="block text-sm font-medium text-gray-700">Amount (₹)</label>
-                    <input type="number" id="amount" placeholder="Enter amount" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="number" id="amount" name="amount" placeholder="Enter amount" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
                     <label for="fuel-type" class="block text-sm font-medium text-gray-700">Fuel Type</label>
-                    <select id="fuel-type" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
+                    <select id="fuel_type" name="fuel_type" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
                         <option>Petrol</option>
                         <option>Diesel</option>
                         <option>Power Petrol</option>
@@ -130,18 +131,13 @@
                     </select>
                 </div>
                  <div>
-                    <label class="block text-sm font-medium text-gray-700">Payment Method</label>
-                    <div class="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <button type="button" class="flex items-center justify-center p-4 border rounded-lg hover:bg-gray-100 focus:ring-2 focus:ring-indigo-500">
-                            <i class="fab fa-google-pay text-3xl mr-3"></i> UPI
-                        </button>
-                        <button type="button" class="flex items-center justify-center p-4 border rounded-lg hover:bg-gray-100 focus:ring-2 focus:ring-indigo-500">
-                            <i class="far fa-credit-card text-3xl mr-3"></i> Card
-                        </button>
-                         <button type="button" class="flex items-center justify-center p-4 border rounded-lg hover:bg-gray-100 focus:ring-2 focus:ring-indigo-500">
-                            <i class="fas fa-wallet text-3xl mr-3"></i> Wallet
-                        </button>
-                    </div>
+                        <label for="payment_mode" class="block text-sm font-medium text-gray-700">Payment Method</label>
+                        <select id="payment_mode" name="payment_mode" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="">-- Select Payment Method --</option>
+            q           <option value="UPI">UPI</option>
+                        <option value="Card">Card</option>
+                        <option value="Wallet">Wallet</option>
+                    </select>
                 </div>
                  <div>
                     <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-md hover:bg-indigo-700 transition-colors duration-300">
