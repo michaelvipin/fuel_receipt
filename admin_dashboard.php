@@ -1,3 +1,5 @@
+<?php include("db_connect.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +12,11 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+        }
+        .nav-link.active {
+            background-color: #1f2937; /* gray-900 */
+            color: white;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -100,27 +107,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Sample User Row -->
-                                <tr>
-                                    <td class="text-left py-3 px-4">Rose</td>
-                                    <td class="text-left py-3 px-4">user@example.com</td>
-                                    <td class="text-left py-3 px-4">TN-07-AB-1234</td>
-                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Active</span></td>
-                                    <td class="text-center py-3 px-4">
-                                        <button class="text-blue-500 hover:text-blue-700 mr-2"><i class="fas fa-edit"></i></button>
-                                        <button class="text-red-500 hover:text-red-700"><i class="fas fa-power-off"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="bg-gray-50">
-                                    <td class="text-left py-3 px-4">Ravi</td>
-                                    <td class="text-left py-3 px-4">ravi@example.com</td>
-                                    <td class="text-left py-3 px-4">TN-09-XY-5678</td>
-                                    <td class="text-left py-3 px-4"><span class="bg-gray-200 text-gray-800 py-1 px-3 rounded-full text-xs">Inactive</span></td>
-                                    <td class="text-center py-3 px-4">
-                                        <button class="text-blue-500 hover:text-blue-700 mr-2"><i class="fas fa-edit"></i></button>
-                                        <button class="text-green-500 hover:text-green-700"><i class="fas fa-power-off"></i></button>
-                                    </td>
-                                </tr>
+                                <?php include 'fetch_users.php'; ?>
                             </tbody>
                         </table>
                     </div>
@@ -172,24 +159,7 @@
                                 </tr>
                             </thead>
                             <tbody class="text-gray-700">
-                                <tr>
-                                    <td class="text-left py-3 px-4">RCPT1001</td>
-                                    <td class="text-left py-3 px-4">Rose</td>
-                                    <td class="text-left py-3 px-4">TN-07-AB-1234</td>
-                                    <td class="text-left py-3 px-4">08-09-2025</td>
-                                    <td class="text-left py-3 px-4">₹500.00</td>
-                                    <td class="text-left py-3 px-4">UPI</td>
-                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Success</span></td>
-                                </tr>
-                                <tr class="bg-gray-50">
-                                    <td class="text-left py-3 px-4">RCPT1002</td>
-                                    <td class="text-left py-3 px-4">Ravi</td>
-                                    <td class="text-left py-3 px-4">TN-09-XY-5678</td>
-                                    <td class="text-left py-3 px-4">09-09-2025</td>
-                                    <td class="text-left py-3 px-4">₹800.00</td>
-                                    <td class="text-left py-3 px-4">Card</td>
-                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Success</span></td>
-                                </tr>
+                                <?php include 'fetch_receipts.php'; ?>
                             </tbody>
                         </table>
                     </div>
@@ -210,20 +180,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-left py-3 px-4">TXN123456789</td>
-                                    <td class="text-left py-3 px-4">2025-09-08 10:30 AM</td>
-                                    <td class="text-left py-3 px-4">Rose</td>
-                                    <td class="text-left py-3 px-4">₹500.00</td>
-                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Success</span></td>
-                                </tr>
-                                <tr class="bg-gray-50">
-                                    <td class="text-left py-3 px-4">TXN987654321</td>
-                                    <td class="text-left py-3 px-4">2025-09-09 02:15 PM</td>
-                                    <td class="text-left py-3 px-4">Ravi</td>
-                                    <td class="text-left py-3 px-4">₹800.00</td>
-                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Success</span></td>
-                                </tr>
+                                <?php include 'fetch_transactions.php'; ?>
                             </tbody>
                         </table>
                     </div>
@@ -260,29 +217,27 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all navigation links and content sections
             const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('.page-content');
-
-            const showSection = (hash) => {
-                const targetHash = hash || '#dashboard';
-                let sectionFound = false;
-
-                sections.forEach(section => {
-                    if ('#' + section.id === targetHash) {
-                        section.classList.remove('hidden');
-                        sectionFound = true;
-                    } else {
-                        section.classList.add('hidden');
-                    }
+            const contentSections = document.querySelectorAll('.page-content');
+            
+            // Function to show the selected section and hide others
+            function showSection(sectionId) {
+                // Hide all sections
+                contentSections.forEach(section => {
+                    section.classList.add('hidden');
                 });
-
-                if (!sectionFound) {
-                    document.getElementById('dashboard').classList.remove('hidden');
+                
+                // Show the selected section
+                const targetSection = document.querySelector(sectionId);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
                 }
-
+                
+                // Update active link styling
                 navLinks.forEach(link => {
-                    if (link.getAttribute('href') === targetHash) {
+                    if (link.getAttribute('href') === sectionId) {
                         link.classList.add('bg-gray-900', 'text-white', 'font-semibold');
                         link.classList.remove('text-gray-300');
                     } else {
@@ -290,23 +245,34 @@
                         link.classList.add('text-gray-300');
                     }
                 });
-            };
-
+            }
+            
+            // Add click event listeners to navigation links
             navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
+                link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const hash = link.getAttribute('href');
-                    window.location.hash = hash;
+                    const sectionId = this.getAttribute('href');
+                    showSection(sectionId);
+                    
+                    // Update URL hash
+                    window.location.hash = sectionId;
                 });
             });
-
-            window.addEventListener('hashchange', () => {
+            
+            // Check if there's a hash in the URL and show the corresponding section
+            if (window.location.hash) {
+                showSection(window.location.hash);
+            } else {
+                // Show dashboard by default
+                showSection('#dashboard');
+            }
+            
+            // Listen for hash changes (when using browser back/forward buttons)
+            window.addEventListener('hashchange', function() {
                 showSection(window.location.hash);
             });
-
-            showSection(window.location.hash);
         });
     </script>
+
 </body>
 </html>
-
