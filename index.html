@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickStop Fuel Hub - Fueling Your Journey, Simplified.</title>
+    <meta name="description" content="Welcome to QuickStop Fuel Hub – your trusted partner for quality fuel, fast service, and instant digital receipts in [Your City].">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Add Poppins to Tailwind's default font stack */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-900">
+                QuickStop Fuel Hub
+                </a>
+
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#home" class="text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300">About Us</a>
+                <a href="#services" class="text-gray-600 hover:text-blue-600 transition duration-300">Our Services</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600 transition duration-300">Promotions</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact & Location</a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-2">
+                <a href="Login.html" class="px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-600 hover:text-white transition duration-300">Login</a>
+            </div>
+
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        
+        <div id="mobile-menu" class="md:hidden hidden bg-white py-4">
+            <a href="#home" class="block px-6 py-2 text-gray-600 hover:bg-blue-50">Home</a>
+            <a href="#about" class="block px-6 py-2 text-gray-600 hover:bg-blue-50">About Us</a>
+            <a href="#services" class="block px-6 py-2 text-gray-600 hover:bg-blue-50">Our Services</a>
+            <a href="#" class="block px-6 py-2 text-gray-600 hover:bg-blue-50">Promotions</a>
+            <a href="#contact" class="block px-6 py-2 text-gray-600 hover:bg-blue-50">Contact & Location</a>
+            <div class="px-6 pt-4 mt-4 border-t border-gray-200">
+                <a href="#" class="block w-full text-center px-4 py-2 mb-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-600 hover:text-white transition duration-300">User Login</a>
+                <a href="#" class="block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">Admin Login</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="relative h-screen flex items-center justify-center text-center text-white">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('asset/fuel.jpg');"></div>
+            <div class="absolute inset-0 bg-black opacity-60"></div>
+            
+            <div class="relative z-10 px-6">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight">Fueling Your Journey, Simplified.</h1>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-gray-200">
+                    Welcome to QuickStop Fuel Hub – your trusted partner for quality fuel, fast service, and instant digital receipts.
+                </p>
+                <a href="#how-it-works" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-md text-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                    Get Your Digital Receipt
+                </a>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Your Reliable Pit Stop in [Your City/Area]</h2>
+                <p class="max-w-3xl mx-auto text-gray-600 text-lg">
+                    For over <span class="font-bold">10</span> years, QuickStop Fuel Hub has been proudly serving the community of <span class="font-bold">[Your City]</span>. We are more than just a place to refuel; we are committed to providing a clean, safe, and efficient experience for every customer. Our mission is to combine top-grade fuels with modern technology to make your stop as quick and convenient as possible.
+                </p>
+            </div>
+        </section>
+
+        <section id="services" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">More Than Just Fuel</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Quality Fuels</h3>
+                        <p class="text-gray-600">Petrol (Standard & Premium), Diesel (Standard & Premium), and CNG.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /><path d="M9 12l2 2 4-4" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Digital Receipts</h3>
+                        <p class="text-gray-600">Instant, paperless receipts sent directly to your account. Track your spending effortlessly.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">24/7 Operations</h3>
+                        <p class="text-gray-600">We are open round the clock, ready to serve you anytime, day or night.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Tyre Air Pressure Check</h3>
+                        <p class="text-gray-600">Complimentary and accurate air checks to ensure your safety on the road.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Convenience Store</h3>
+                        <p class="text-gray-600">Stocked with snacks, drinks, lubricants, and daily essentials for your journey.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="how-it-works" class="py-20 bg-blue-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Go Paperless! Get Your Fuel Receipts Instantly.</h2>
+                <div class="grid md:grid-cols-3 gap-12 text-center">
+                    <div class="flex flex-col items-center">
+                        <div class="bg-blue-600 text-white rounded-full h-24 w-24 flex items-center justify-center text-4xl font-bold mb-4">1</div>
+                        <h3 class="text-xl font-bold mb-2">Fuel Up</h3>
+                        <p class="text-gray-600">Fill your tank at any of our pumps as usual.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="bg-blue-600 text-white rounded-full h-24 w-24 flex items-center justify-center text-4xl font-bold mb-4">2</div>
+                        <h3 class="text-xl font-bold mb-2">Provide Your Number</h3>
+                        <p class="text-gray-600">Mention your registered mobile number to our attendant.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="bg-blue-600 text-white rounded-full h-24 w-24 flex items-center justify-center text-4xl font-bold mb-4">3</div>
+                        <h3 class="text-xl font-bold mb-2">Get Instant Receipt</h3>
+                        <p class="text-gray-600">That's it! Your receipt is available in your online account instantly.</p>
+                    </div>
+                </div>
+                <div class="mt-16 bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-bold text-center mb-6">Key Benefits</h3>
+                    <div class="flex flex-col md:flex-row justify-around items-center text-center">
+                        <div class="flex items-center mb-4 md:mb-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span class="font-semibold">Eco-Friendly</span>
+                        </div>
+                        <div class="flex items-center mb-4 md:mb-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                            <span class="font-semibold">Organized Expense Tracking</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                            <span class="font-semibold">Never Lose a Receipt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-us" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">The QuickStop Advantage</h2>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-x-12 gap-y-8">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-bold">Guaranteed Quality & Quantity</h3>
+                            <p class="text-gray-600 mt-1">We adhere to the strictest standards to ensure you get pure, unadulterated fuel every time.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-bold">Fast & Friendly Service</h3>
+                            <p class="text-gray-600 mt-1">Our trained staff is dedicated to getting you back on the road quickly and safely.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-bold">Clean & Hygienic Facilities</h3>
+                            <p class="text-gray-600 mt-1">We maintain spotless restrooms and a clean environment for your comfort.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-bold">Tech-Forward</h3>
+                            <p class="text-gray-600 mt-1">Our innovative digital receipt system makes managing your expenses easier than ever.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Visit Us Today!</h2>
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.841511942835!2d78.11977531534386!3d10.0299889928303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00c582815e1573%3A0x33e5aff9923e2a87!2sMadurai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+                            width="100%" 
+                            height="450" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            class="rounded-lg shadow-lg">
+                        </iframe>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Address</h3>
+                            <p class="text-gray-600 text-lg">
+                                QuickStop Fuel Hub<br>
+                                [Your Full Address],<br>
+                                [City, Pincode]
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Hours of Operation</h3>
+                            <p class="text-gray-600 text-lg">Open 24 Hours, 7 Days a Week</p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Contact Information</h3>
+                            <p class="text-gray-600 text-lg">
+                                <strong>Phone:</strong> <a href="tel:[Your Contact Number]" class="text-blue-600 hover:underline">[Your Contact Number]</a><br>
+                                <strong>Email:</strong> <a href="mailto:[Your Email Address]" class="text-blue-600 hover:underline">[Your Email Address]</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">QuickStop Fuel Hub</h3>
+                    <p class="text-gray-400">Fueling your journey with quality, speed, and modern convenience.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="Login.html" class="text-gray-400 hover:text-white">Login</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 4.22c.636-.247 1.363-.416 2.427-.465C9.797 2.013 10.15 2 12.315 2h.004zm-.717 1.442h-.001c-2.336 0-2.642.01-3.566.052-1.006.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.851-.344 1.857-.043.924-.052 1.23-.052 3.566 0 2.336.01 2.642.052 3.566.045 1.006.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.851.3 1.857.344.924.043 1.23.052 3.566.052 2.336 0 2.642-.01 3.566-.052 1.006-.045 1.504-.207 1.857-.344.467-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.851.344-1.857.043-.924.052-1.23.052-3.566 0-2.336-.01-2.642-.052-3.566-.045-1.006-.207-1.504-.344-1.857a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.851-.3-1.857-.344-.924-.043-1.23-.052-3.566-.052z" clip-rule="evenodd" /><path d="M12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.441a3.694 3.694 0 100 7.388 3.694 3.694 0 000-7.388z" /><path d="M16.965 6.57a1.25 1.25 0 11-2.5 0 1.25 1.25 0 012.5 0z" /></svg></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>&copy; 2025 QuickStop Fuel Hub. All Rights Reserved. | Designed by <a href="#" class="hover:text-white">[Your Name/Company]</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
